@@ -1,0 +1,7 @@
+# Shared Directory
+
+This directory contains shared components, directives, and pipes that can be reused across multiple features.
+
+- `components/` - Reusable UI components
+- `directives/` - Custom directives
+- `pipes/` - Custom pipes

@@ -1,0 +1,30 @@
+# For Netlify (_redirects file)
+# Place this in the public folder as _redirects (no file extension)
+/*    /index.html   200
+
+# For Vercel (vercel.json)
+# Place this in the public folder as vercel.json
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+
+# For Firebase Hosting (firebase.json)
+# This would be in the root directory
+{
+  "hosting": {
+    "public": "dist/GheraByPriya/browser",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

@@ -1,0 +1,183 @@
+<app-header></app-header>
+
+<!-- Back Button -->
+<div class="back-button-container">
+  <button class="back-button" (click)="goBack()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="currentColor"/>
+    </svg>
+    Back to Products
+  </button>
+</div>
+
+<main class="main-content">
+  <div class="product-detail-page">
+    <div class="product-container">
+      <!-- Image Carousel Section -->
+      <div class="product-gallery">
+        <div class="main-image-container">
+          <img [src]="currentImage" alt="Product Image" class="main-image" />
+          <div class="image-navigation">
+            <button class="nav-btn prev-btn" (click)="previousImage()">&#10094;</button>
+            <button class="nav-btn next-btn" (click)="nextImage()">&#10095;</button>
+          </div>
+        </div>
+        <div class="thumbnail-container" *ngIf="product">
+          <div class="thumbnails">
+            <img
+              *ngFor="let image of product.images; let i = index"
+              [src]="image"
+              [class.active]="i === currentImageIndex"
+              (click)="setCurrentImage(i)"
+              alt="Product thumbnail"
+              class="thumbnail" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Information Section -->
+      <div class="product-info" *ngIf="product">
+        <h1 class="product-title">{{ product.name }}</h1>
+
+        <div class="product-price">
+          <span class="current-price">{{ product.price }}</span>
+          <span class="original-price" >₹{{ product.originalPrice }}</span>
+
+          <!-- <span class="original-price" *ngIf="product.originalPrice && product.discount">₹{{ product.originalPrice * (1 - (product.discount || 0) / 100) }}</span> -->
+          <span class="discount" *ngIf="product.discount">{{ product.discount }}% off</span>
+          <em class="delivery-note">Delivery charges applicable as per location.</em>
+        </div>
+
+        <div class="product-description">
+          <p>{{ product.description }}</p>
+        </div>
+
+        <!-- Size Selection -->
+        <div class="size-selection" *ngIf="product.sizes?.length">
+          <h3>Size</h3>
+          <div class="size-options">
+            <button
+              *ngFor="let size of product.sizes"
+              [class.selected]="selectedSize === size"
+              (click)="selectSize(size)"
+              class="size-btn">
+              {{ size }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Color Selection -->
+        <div class="color-selection" *ngIf="product.colors?.length">
+          <h3>Color</h3>
+          <div class="color-options">
+            <button
+              *ngFor="let color of product.colors"
+              [class.selected]="selectedColor === color.name"
+              (click)="selectColor(color)"
+              class="color-btn">
+              <!-- <span class="color-swatch" [style.background-color]="color.hex"></span> -->
+              {{ color.name }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Quantity Selection -->
+        <div class="quantity-selection">
+          <h3>Quantity</h3>
+          <div class="quantity-controls">
+            <button (click)="decreaseQuantity()" class="qty-btn">-</button>
+            <span class="quantity">{{ quantity }}</span>
+            <button (click)="increaseQuantity()" class="qty-btn">+</button>
+          </div>
+        </div>
+
+        <!-- Size-required modal -->
+        <div class="size-modal-backdrop" *ngIf="showSizeModal">
+          <div class="size-modal">
+            <p>Please choose a size before contacting us. You can select a size from the options above.</p>
+            <div class="modal-actions">
+              <button class="btn btn-cancel" (click)="cancelContact()">Cancel</button>
+              <!-- <button class="btn btn-confirm" (click)="confirmContact()">Proceed</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Bottom Grid -->
+    <div class="product-bottom-grid" *ngIf="product">
+      <div class="product-details-col">
+        <div class="detail-section">
+          <h3>Product Details</h3>
+          <ul>
+            <li *ngFor="let detail of product.details">{{ detail }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="care-instructions-col">
+        <div class="detail-section">
+          <h3>Care Instructions</h3>
+          <ul>
+            <li *ngFor="let care of product.careInstructions">{{ care }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="promocode-buttons-col">
+        <div class="promocode-section" *ngIf="!product.outOfStock">
+          <h3>Promocode</h3>
+          <input type="text" [(ngModel)]="promocode" (input)="validatePromocode()" placeholder="Enter promocode" class="promocode-input" />
+          <div *ngIf="promocodeError" class="error-message">{{ promocodeError }}</div>
+        </div>
+
+        <div class="action-buttons" *ngIf="!product.outOfStock">
+          <!-- <button class="like-btn" (click)="toggleLike()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5C22 12.27 18.6 15.36 13.45 20.03L12 21.35Z" [attr.fill]="isLiked ? '#ff4757' : 'none'" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            {{ isLiked ? 'Liked' : 'Like' }}
+          </button> -->
+
+          <a href="#" (click)="openWhatsApp($event)"  target="_blank" class="contact-btn whatsapp-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+            </svg>
+            Order on WhatsApp
+          </a>
+
+          <a href="#" (click)="openInstagram($event)" target="_blank" class="contact-btn instagram-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            DM on Instagram
+          </a>
+        </div>
+        <div class="out-of-stock-message" *ngIf="product.outOfStock">
+          <p>Out of Stock</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <!-- <div class="reviews-section" *ngIf="product">
+      <h2>Customer Reviews</h2>
+      <div class="reviews-container">
+        <div class="review-item" *ngFor="let review of product.reviewList">
+          <div class="review-header">
+            <div class="reviewer-info">
+              <span class="reviewer-name">{{ review.name }}</span>
+              <div class="review-rating">
+                <span class="star" *ngFor="let star of [1,2,3,4,5]" [class.filled]="star <= review.rating">★</span>
+              </div>
+            </div>
+            <span class="review-date">{{ review.date }}</span>
+          </div>
+          <p class="review-text">{{ review.comment }}</p>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</main>
+
+<app-footer></app-footer>

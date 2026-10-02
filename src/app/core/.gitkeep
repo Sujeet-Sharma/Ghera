@@ -1,0 +1,7 @@
+# Core Directory
+
+This directory contains singleton services, guards, and interceptors that are used throughout the application.
+
+- `services/` - Core services (e.g., API services, authentication service)
+- `guards/` - Route guards (e.g., authentication guard, role guard)
+- `interceptors/` - HTTP interceptors (e.g., auth interceptor, error interceptor)

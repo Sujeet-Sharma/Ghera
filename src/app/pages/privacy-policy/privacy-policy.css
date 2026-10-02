@@ -1,0 +1,82 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.main-content {
+  width: 100%;
+}
+
+.policy-section {
+  max-width: 1000px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+
+.policy-container {
+  background: #ffffff;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.policy-container h1 {
+  font-family: serif;
+  font-size: 2.5rem;
+  color: #2c2c2c;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.last-updated {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.policy-content h2 {
+  font-family: serif;
+  font-size: 1.5rem;
+  color: #2c2c2c;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.policy-content p {
+  color: #5a5a5a;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.policy-content ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  color: #5a5a5a;
+  line-height: 1.6;
+}
+
+.policy-content li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.policy-content li:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .policy-section {
+    padding: 0 1rem;
+    margin: 2rem auto;
+  }
+
+  .policy-container {
+    padding: 2rem;
+  }
+
+  .policy-container h1 {
+    font-size: 2rem;
+  }
+}

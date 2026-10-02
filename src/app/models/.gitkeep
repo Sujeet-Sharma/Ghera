@@ -1,0 +1,5 @@
+# Models Directory
+
+This directory contains TypeScript interfaces, types, and models used throughout the application.
+
+Each model should be in its own file with a descriptive name (e.g., `product.model.ts`).

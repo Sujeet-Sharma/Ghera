@@ -1,0 +1,197 @@
+[
+  {
+    "id": 1,
+    "name": "KAYA",
+    "description": "A full-flare cotton skirt with an elastic waist and dori tie-up for a comfortable fit.",
+    "price": "₹999",
+    "originalPrice": 1799,
+    "discount": 44.47,
+    "images": [
+      "assets/images/KAYA/KAYA (1).JPG",
+      "assets/images/KAYA/KAYA (2).JPG",
+      "assets/images/KAYA/KAYA (3).JPG",
+      "assets/images/KAYA/KAYA (4).JPG",
+      "assets/images/KAYA/KAYA (5).JPG"
+    ],
+    "sizes": [ "S", "M"],
+    "colors": [
+      { "name": "Orange", "hex": "#fc7005" }
+
+    ],
+    "details": [
+      "Premium fabric",
+      "Hand block printed",
+      "Elegant design",
+      "100% cotton"
+    ],
+    "careInstructions": [
+      "Dry clean recommended",
+      "Hand wash gently",
+      "Both side iron"
+    ],
+    "outOfStock": false
+  },
+  {
+    "id": 2,
+    "name": "Meera",
+    "description": "A four-layer, full-flare cotton skirt featuring an elastic waistband, dori tie-up, and a functional pocket for all-day comfort.",
+     "price": "₹1,599",
+    "originalPrice": 2999,
+    "discount": 46.68,
+    "images": [
+      "assets/images/Meera/MEERA (1).JPG",
+      "assets/images/Meera/MEERA (2).JPG",
+      "assets/images/Meera/MEERA (3).JPG",
+      "assets/images/Meera/MEERA (4).JPG",
+      "assets/images/Meera/MEERA (5).JPG"
+    ],
+    "sizes": ["S", "M", "L"],
+    "colors": [
+      { "name": "Pink", "hex": "#ffffff" },
+      { "name": "Grey", "hex": "#0000ff" }
+   
+    ],
+    "details": [
+      "Premium fabric",
+      "Hand block printed",
+      "Elegant design",
+      "100% cotton"
+    ],
+    "careInstructions": [
+      "Dry clean recommended",
+      "Hand wash gently",
+      "Both side iron"
+    ],
+    "outOfStock": false
+  },
+  {
+    "id": 3,
+    "name": "Noor",
+    "description": "A four-layer, full-flare cotton skirt featuring an elastic waistband, dori tie-up, and a functional pocket for all-day comfort.",
+     "price": "₹1,599",
+    "originalPrice": 2999,
+    "discount": 46.68,
+    "images": [
+      "assets/images/Noor/NOOR (1).JPG",
+      "assets/images/Noor/NOOR (2).JPG",
+      "assets/images/Noor/NOOR (3).JPG",
+      "assets/images/Noor/NOOR (4).JPG",
+      "assets/images/Noor/NOOR (5).JPG"
+    ],
+    "sizes": [ "S", "M", "L", "XL" ],
+    "colors": [
+      { "name": "white", "hex": "#ffffff" }
+ 
+    ],
+    "details": [
+      "Premium fabric",
+      "Elegant design",
+      "100% cotton"
+    ],
+    "careInstructions": [
+      "Dry clean recommended",
+      "Hand wash gently",
+      "Both side iron"
+    ],
+    "outOfStock": true
+  },
+  {
+    "id": 4,
+    "name": "Pearl",
+    "description": "A four-layer, full-flare cotton skirt featuring an elastic waistband, dori tie-up, and a functional pocket for all-day comfort.",
+     "price": "₹1,599",
+    "originalPrice": 2999,
+    "discount": 46.68,
+    "images": [
+      "assets/images/Pearl/PERAL (1).JPG",
+      "assets/images/Pearl/PERAL (2).JPG",
+      "assets/images/Pearl/PERAL (3).JPG",
+      "assets/images/Pearl/PERAL (4).JPG",
+      "assets/images/Pearl/PERAL (5).JPG"
+
+    ],
+    "sizes": ["Free Size","S", "M", "L"],
+    "colors": [
+      { "name": "white", "hex": "#fff" }
+   
+    ],
+    "details": [
+      "Premium fabric",
+      "Hand block printed",
+      "Elegant design",
+      "100% cotton"
+    ],
+    "careInstructions": [
+      "Dry clean recommended",
+      "Hand wash gently",
+      "Both side iron"
+    ],
+    "outOfStock": false
+  },
+  {
+    "id": 5,
+    "name": "Riva",
+    "description": "A four-layer, full-flare cotton skirt featuring an elastic waistband, dori tie-up, and a functional pocket for all-day comfort.",
+     "price": "₹1,999",
+    "originalPrice": 3499,
+    "discount": 42.87,
+    "images": [
+      "assets/images/Riva/RIVA (1).JPG",
+      "assets/images/Riva/RIVA (2).JPG",
+      "assets/images/Riva/RIVA (3).JPG",
+      "assets/images/Riva/RIVA (4).JPG",
+      "assets/images/Riva/RIVA (5).JPG"
+    ],
+    "sizes": ["S", "M", "L"],
+    "colors": [
+      { "name": "Brown", "hex": "#000080" }
+
+    ],
+    "details": [
+      "Premium fabric",
+      "Hand block printed",
+      "Elegant design",
+      "100% cotton"
+    ],
+    "careInstructions": [
+      "Dry clean recommended",
+      "Hand wash gently",
+      "Both side iron"
+    ],
+    "outOfStock": false
+  },
+  {
+    "id": 6,
+    "name": "Sanchi",
+    "description": "A four-layer, full-flare cotton skirt featuring an elastic waistband, dori tie-up, and a functional pocket for all-day comfort.",
+    "price": "₹1,799",
+    "originalPrice": 3399,
+    "discount": 47.07,
+    "images": [
+      "assets/images/Sanchi/SANCHI (1).JPG",
+      "assets/images/Sanchi/SANCHI (2).JPG",
+      "assets/images/Sanchi/SANCHI (3).JPG",
+      "assets/images/Sanchi/SANCHI (4).JPG",
+      "assets/images/Sanchi/SANCHI (5).JPG",
+      "assets/images/Sanchi/SANCHI (6).JPG",
+      "assets/images/Sanchi/SANCHI (7).JPG"
+    ],
+    "sizes": ["S", "M", "L", "XL"],
+    "colors": [
+      { "name": "Black", "hex": "#000000" }
+    
+    ],
+    "details": [
+      "Premium fabric",
+      "Hand block printed",
+      "Elegant design",
+      "100% cotton"
+    ],
+    "careInstructions": [
+      "Dry clean recommended",
+      "Hand wash gently",
+      "Both side iron"
+    ],
+    "outOfStock": false
+  }
+]

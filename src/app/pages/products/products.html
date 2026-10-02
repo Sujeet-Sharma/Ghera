@@ -1,0 +1,257 @@
+<app-header></app-header>
+
+<main class="main-content">
+  <div class="products-page">
+    <!-- Filters Sidebar -->
+    <aside class="filters-sidebar">
+      <div class="filters-container">
+        <h2>Filters</h2>
+
+        <!-- Price Filter -->
+        <div class="filter-section">
+          <h3>Price Range</h3>
+          <div class="price-ranges">
+            <label class="price-range" [class.selected]="selectedPriceRange === 'under-1000'">
+              <input type="radio" name="price" [value]="'under-1000'" [(ngModel)]="selectedPriceRange" />
+              Under ₹1,000
+            </label>
+            <label class="price-range" [class.selected]="selectedPriceRange === '1000-2000'">
+              <input type="radio" name="price" value="1000-2000" [(ngModel)]="selectedPriceRange" />
+              ₹1,000 - ₹2,000
+            </label>
+            <label class="price-range" [class.selected]="selectedPriceRange === '2000-3000'">
+              <input type="radio" name="price" value="2000-3000" [(ngModel)]="selectedPriceRange" />
+              ₹2,000 - ₹3,000
+            </label>
+            <label class="price-range" [class.selected]="selectedPriceRange === '3000-5000'">
+              <input type="radio" name="price" value="3000-5000" [(ngModel)]="selectedPriceRange" />
+              ₹3,000 - ₹5,000
+            </label>
+            <label class="price-range" [class.selected]="selectedPriceRange === 'above-5000'">
+              <input type="radio" name="price" value="above-5000" [(ngModel)]="selectedPriceRange" />
+              Above ₹5,000
+            </label>
+          </div>
+        </div>
+
+        <!-- Color Filter -->
+        <div class="filter-section">
+          <h3>Color</h3>
+          <div class="color-options">
+            <label class="color-option" *ngFor="let color of availableColors">
+              <input type="checkbox" [checked]="selectedColors.includes(color)"
+                (change)="onColorToggle(color, $event.target.checked)" />
+              <span class="color-swatch" [style.background-color]="getColorHex(color)"></span>
+              {{ color }}
+            </label>
+          </div>
+        </div>
+
+        <!-- Size Filter -->
+        <div class="filter-section">
+          <h3>Size</h3>
+          <div class="size-options">
+            <label class="size-option">
+              <input type="checkbox" [checked]="selectedSizes.includes('XS')" (change)="onSizeToggle('XS')" />
+              XS
+            </label>
+            <label class="size-option">
+              <input type="checkbox" [checked]="selectedSizes.includes('S')" (change)="onSizeToggle('S')" />
+              S
+            </label>
+            <label class="size-option">
+              <input type="checkbox" [checked]="selectedSizes.includes('M')" (change)="onSizeToggle('M')" />
+              M
+            </label>
+            <label class="size-option">
+              <input type="checkbox" [checked]="selectedSizes.includes('L')" (change)="onSizeToggle('L')" />
+              L
+            </label>
+            <label class="size-option">
+              <input type="checkbox" [checked]="selectedSizes.includes('XL')" (change)="onSizeToggle('XL')" />
+              XL
+            </label>
+            <label class="size-option">
+              <input type="checkbox" [checked]="selectedSizes.includes('XXL')" (change)="onSizeToggle('XXL')" />
+              XXL
+            </label>
+          </div>
+        </div>
+
+        <!-- Fabric Filter -->
+        <div class="filter-section">
+          <h3>Fabric</h3>
+          <div class="fabric-options">
+            <label class="fabric-option">
+              <input type="checkbox" value="cotton" />
+              Cotton
+            </label>
+            <label class="fabric-option">
+              <input type="checkbox" value="silk" />
+              Silk
+            </label>
+            <label class="fabric-option">
+              <input type="checkbox" value="linen" />
+              Linen
+            </label>
+            <label class="fabric-option">
+              <input type="checkbox" value="chiffon" />
+              Chiffon
+            </label>
+            <label class="fabric-option">
+              <input type="checkbox" value="velvet" />
+              Velvet
+            </label>
+            <label class="fabric-option">
+              <input type="checkbox" value="wool" />
+              Wool
+            </label>
+          </div>
+        </div>
+
+        <button class="apply-filters-btn">Apply Filters</button>
+        <button class="clear-filters-btn" (click)="clearFilters()">Clear All</button>
+      </div>
+    </aside>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+      <h1>Our Collection</h1>
+
+      <div class="products-header">
+        <div class="header-controls">
+          <div class="sort-options">
+            <select class="sort-select" [(ngModel)]="selectedSort" title="Sort products">
+              <option value="newest">Newest First</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+            </select>
+          </div>
+          <div>
+            <button class="filter-toggle-btn" (click)="openFilterModal()" [class.active]="showFilterModal">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+                  fill="currentColor" />
+              </svg>
+              Filters
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="products-grid">
+        @for (product of filteredProducts; track product.id) {
+        <div class="product-card">
+          <div class="product-image">
+            <img [src]="product.images[0]" [alt]="product.name + ' - ' + product.description" [title]="product.name" />
+            <div class="product-overlay">
+              <button class="quick-view-btn" (click)="viewProductDetails(product.id)">
+                <span class="desktop-text">Quick View</span>
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-description">{{ product.description }}</p>
+            <div class="product-details">
+              <div class="price-row">
+                <span class="product-price">{{ product.price }}</span>
+                @if (product.discount && product.discount > 0) {
+                <span class="original-price">{{ formatOriginalPrice(product.originalPrice) }}</span>
+                <span class="discount-badge">{{ product.discount }}% OFF</span>
+                }
+              </div>
+            </div>
+            <button class="view-details-btn" [disabled]="product.outOfStock" (click)="viewProductDetails(product.id)">{{ product.outOfStock ? 'Out of Stock' : 'View Details' }}</button>
+          </div>
+        </div>
+        }
+      </div>
+
+    </section>
+
+    <!-- Filter Modal for Mobile -->
+    <div class="filter-modal-overlay" [class.show]="showFilterModal" (click)="closeFilterModal()"></div>
+    <div class="filter-modal" [class.show]="showFilterModal">
+      <div class="filter-modal-header">
+        <h3>Filters</h3>
+        <button class="close-modal-btn" (click)="closeFilterModal()" title="Close filter modal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="filter-modal-content">
+        <!-- Price Filter -->
+        <div class="filter-section">
+          <h3>Price Range</h3>
+          <div class="price-ranges">
+            <label class="price-range" [class.selected]="selectedPriceRange === 'under-1000'">
+              <input type="radio" name="price" value="under-1000" [(ngModel)]="selectedPriceRange" />
+              Under ₹1,000
+            </label>
+            <label class="price-range" [class.selected]="selectedPriceRange === '1000-2000'">
+              <input type="radio" name="price" value="1000-2000" [(ngModel)]="selectedPriceRange" />
+              ₹1,000 - ₹2,000
+            </label>
+            <label class="price-range" [class.selected]="selectedPriceRange === '2000-3000'">
+              <input type="radio" name="price" value="2000-3000" [(ngModel)]="selectedPriceRange" />
+              ₹2,000 - ₹3,000
+            </label>
+            <label class="price-range" [class.selected]="selectedPriceRange === '3000-5000'">
+              <input type="radio" name="price" value="3000-5000" [(ngModel)]="selectedPriceRange" />
+              ₹3,000 - ₹5,000
+            </label>
+            <label class="price-range" [class.selected]="selectedPriceRange === 'above-5000'">
+              <input type="radio" name="price" value="above-5000" [(ngModel)]="selectedPriceRange" />
+              Above ₹5,000
+            </label>
+          </div>
+        </div>
+
+        <!-- Color Filter -->
+        <div class="filter-section">
+          <h3>Color</h3>
+          <div class="color-options">
+            <label class="color-option" *ngFor="let color of availableColors">
+              <input type="checkbox" [checked]="selectedColors.includes(color)"
+                (change)="onColorToggle(color, $event.target.checked)" />
+              <span class="color-swatch" [style.background-color]="getColorHex(color)"></span>
+              {{ color }}
+            </label>
+          </div>
+        </div>
+
+        <!-- Size Filter -->
+        <div class="filter-section">
+          <h3>Size</h3>
+          <div class="size-options">
+            <button class="size-btn" [class.selected]="selectedSizes.includes('XS')"
+              (click)="onSizeToggle('XS')">XS</button>
+            <button class="size-btn" [class.selected]="selectedSizes.includes('S')"
+              (click)="onSizeToggle('S')">S</button>
+            <button class="size-btn" [class.selected]="selectedSizes.includes('M')"
+              (click)="onSizeToggle('M')">M</button>
+            <button class="size-btn" [class.selected]="selectedSizes.includes('L')"
+              (click)="onSizeToggle('L')">L</button>
+            <button class="size-btn" [class.selected]="selectedSizes.includes('XL')"
+              (click)="onSizeToggle('XL')">XL</button>
+            <button class="size-btn" [class.selected]="selectedSizes.includes('XXL')"
+              (click)="onSizeToggle('XXL')">XXL</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-modal-footer">
+        <button class="clear-filters-btn" (click)="clearFilters()">Clear All</button>
+        <button class="apply-filters-btn" (click)="applyFilters()">Apply Filters</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<app-footer></app-footer>

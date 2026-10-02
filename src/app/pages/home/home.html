@@ -1,0 +1,61 @@
+<app-header></app-header>
+
+<main class="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          <span class="hero-title-line">Beautiful</span>
+          <span class="hero-title-main">Ethnic Fashion</span>
+        </h1>
+        <p class="hero-subtitle">Handcrafted with Love by Priya</p>
+        <button class="btn btn-primary" (click)="navigateToProducts()">Shop Now</button>
+      </div>
+      <div class="hero-image">
+        <img src="assets/images/cover1.jpg" alt="Beautiful ethnic fashion" />
+      </div>
+    </div>
+    <div class="hero-pattern"></div>
+  </section>
+
+  <!-- Shop Our Collection Section -->
+  <section class="collection-section">
+    <h2 class="section-title">Shop Our Collection</h2>
+    <div class="product-grid">
+      @if (products$ | async; as products) {
+        @for (product of products; track product.id) {
+          <div class="product-card">
+            <div class="product-image">
+              <img [src]="product.images[0]" [alt]="product.name" />
+              <div class="product-overlay">
+                <button class="quick-view-btn" (click)="viewProduct(product)">
+                  <span class="desktop-text">Quick View</span>
+                </button>
+              </div>
+              
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">{{ product.name }}</h3>
+              <div class="product-details">
+                <div class="price-row">
+                  <span class="product-price">{{ product.price }}</span>
+                  @if (product.discount && product.discount > 0) {
+                    <span class="original-price">{{ formatOriginalPrice(product.originalPrice) }}</span>
+                    <span class="discount-badge">{{ product.discount }}% OFF</span>
+                  }
+                </div>
+              </div>
+              <button class="view-details-btn" [disabled]="product.outOfStock" (click)="viewProduct(product)">{{ product.outOfStock ? 'Out of Stock' : 'View Details' }}</button>
+            </div>
+          </div>
+        }
+      }
+    </div>
+    <div class="view-all-container">
+      <button class="btn btn-primary btn-large" (click)="viewAllProducts()">View All Products</button>
+    </div>
+  </section>
+</main>
+
+<app-footer></app-footer>

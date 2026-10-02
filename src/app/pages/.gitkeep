@@ -1,0 +1,9 @@
+# Pages Directory
+
+This directory contains page-level components (features).
+
+Each page component should be self-contained with its own:
+- Component TypeScript file
+- Template HTML file
+- Styles CSS file
+- Any page-specific services or models
